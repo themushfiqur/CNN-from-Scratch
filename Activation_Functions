@@ -1,0 +1,26 @@
+import numpy as np
+
+def ReLU(Z):
+    return np.maximum(0, Z)
+
+
+def dReLU(Z):
+    return np.where(Z <= 0, 0, 1)
+
+
+def Sigmoid(Z):
+    return (1 / 1 + np.exp(-Z))
+
+
+def dSigmoid(Z):
+    return (Sigmoid(Z) * (1 - Sigmoid(Z)))
+
+
+def Softmax(Z):
+    exps = np.exp(Z - np.max(Z, axis=1, keepdims=True))
+    return exps / np.sum(exps, axis=1, keepdims=True)
+
+
+def dSoftmax(Z):
+    exps = np.exp(Z - np.max(Z, axis=1, keepdims=True))
+    return (exps / np.sum(exps, axis=0) * (1 - (exps / np.sum(exps, axis=0))))
